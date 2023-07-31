@@ -9,6 +9,8 @@ import {
 
   import axios from 'axios'
 
+  import issIcon from './iss.png'
+
 function Map() {
     const [loading, setLoading] = useState(false)
     const [longitude, setLongitude] = useState(0.1278)
@@ -41,16 +43,42 @@ function Map() {
 
     return (
         <ComposableMap projectionConfig={{ scale: 147 }}>
-          <Graticule stroke="#F53" />
+          <Graticule stroke="#1056d7" />
           <Geographies geography="/features.json">
             {({ geographies }) =>
               geographies.map((geo) => (
-                <Geography key={geo.rsmKey} geography={geo} />
+                <Geography 
+                key={geo.rsmKey} 
+                geography={geo} 
+                style={{
+                    background:"#000000",
+                    default: {
+                      fill: "#218d26",
+                    },
+                    hover: {
+                      fill: "#F53",
+                    },
+                    pressed: {
+                      fill: "#E42",
+                    },
+                  }}
+                />
               ))
             }
           </Geographies>
           <Marker coordinates={[longitude, latitude]}>
-            <circle r={8} fill="#F53" />
+            {/* <circle 
+                r={8} 
+                fill="#F53" 
+            /> */}
+            <image
+                href={issIcon}
+                width="30"
+                height="30"
+                x="-15"
+                y="-15"
+                
+            />
           </Marker>
     
         </ComposableMap>
