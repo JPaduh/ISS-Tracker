@@ -4,19 +4,16 @@ import './index.css';
 // import App from './App';
 import "./styles.css";
 
-
-import MapChart from "./MapChart";
+import Map from "./components/Map";
 
 function App() {
   return (
     <div>
-      <MapChart />
+      <Map />
     </div>
   );
 }
 
-// const rootElement = document.getElementById("root");
-// ReactDOM.render(<App />, rootElement);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
