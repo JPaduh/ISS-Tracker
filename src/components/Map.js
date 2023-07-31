@@ -4,6 +4,7 @@ import {
     Geographies,
     Geography,
     Graticule,
+    ZoomableGroup,
     Marker
   } from "react-simple-maps";
 
@@ -43,6 +44,9 @@ function Map() {
 
     return (
         <ComposableMap projectionConfig={{ scale: 147 }}>
+            <ZoomableGroup 
+                // center={[longitude, latitude]} 
+                zoom={9}>
           <Graticule stroke="#1056d7" />
           <Geographies geography="/features.json">
             {({ geographies }) =>
@@ -80,6 +84,7 @@ function Map() {
                 
             />
           </Marker>
+          </ZoomableGroup>
     
         </ComposableMap>
       );
