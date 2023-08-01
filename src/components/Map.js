@@ -14,11 +14,15 @@ import {
 
 function Map() {
     const [loading, setLoading] = useState(false)
-    const [longitude, setLongitude] = useState(0.1278)
-    const [latitude, setLatitude] = useState(51.5074)
+    const [longitude, setLongitude] = useState()
+    const [latitude, setLatitude] = useState()
+    const [number, setNumber] = useState()
+    const [name, setName] = useState()
+    const [astronauts, setAstronauts] = useState([]);
 
     useEffect(() => {
         getLocation()
+        getCrew()
 
         const intervalId = setInterval(() => {
             getLocation();
@@ -41,12 +45,47 @@ function Map() {
 
     }
 
+    const getCrew = async () => {
+        setLoading(true)
+        try {
+            const res = await axios.get('http://api.open-notify.org/astros.json');
+            const astronautsData = res.data;
+      
+            console.log('Astronaut Data:', astronautsData.people); // Add this console.log
+      
+            const astronautsInfo = astronautsData.people.map((astronaut) => ({
+              name: astronaut.name,
+              craft: astronaut.craft,
+            }));
+      
+            console.log('Astronaut Info:', astronautsInfo);
+      
+            setAstronauts(astronautsInfo);
+          } catch (error) {
+            console.error('Error fetching astronaut data:', error);
+          } finally {
+            setLoading(false);
+          }
+        
+    }
+
 
     return (
+        <div>
+            <h1 style={{ color: "white" }}>Total Astronauts: {astronauts.length}</h1>
+            <ul style={{ color: "white" }}>
+            {astronauts.map((astronaut, index) => (
+            <li key={index}>
+                {astronaut.name} - {astronaut.craft}
+            </li>
+            ))}
+        </ul>
+
         <ComposableMap projectionConfig={{ scale: 147 }}>
             <ZoomableGroup 
                 // center={[longitude, latitude]} 
-                zoom={9}>
+                // zoom={9}
+                >
           <Graticule stroke="#1056d7" />
           <Geographies geography="/features.json">
             {({ geographies }) =>
@@ -81,12 +120,12 @@ function Map() {
                 height="30"
                 x="-15"
                 y="-15"
-                
             />
           </Marker>
           </ZoomableGroup>
     
         </ComposableMap>
+        </div>
       );
 }
 
