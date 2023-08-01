@@ -70,8 +70,8 @@ function Map() {
 
     return (
         <div>
-            <h1 style={{ color: "white" }}>Total Astronauts: {astronauts.length}</h1>
-            <ul style={{ color: "white" }}>
+            <h1 style={{ color: "white", fontFamily: "Courier New" }}>Total Astronauts: {astronauts.length}</h1>
+            <ul style={{ color: "white", fontFamily: "Courier New" }}>
             {astronauts.map((astronaut, index) => (
             <li key={index}>
                 {astronaut.name} - {astronaut.craft}
