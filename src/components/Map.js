@@ -16,8 +16,6 @@ function Map() {
     const [loading, setLoading] = useState(false)
     const [longitude, setLongitude] = useState()
     const [latitude, setLatitude] = useState()
-    const [number, setNumber] = useState()
-    const [name, setName] = useState()
     const [astronauts, setAstronauts] = useState([]);
 
     useEffect(() => {
